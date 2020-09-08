@@ -3,38 +3,52 @@
 function init(){
 
   const http = require('http');
-
-  const hostname = 'localhost';
   const port = 3000;
 
-  const server = http.createServer((req, res) => {
-    
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'text/plain');
-    res.end('Hello World!\n');
+  http.createServer(server).listen(port);
+
+}
+
+//The server itself
+function server(req,res){
+
+  const fs = require('fs');
+
+  //Render the HTML file
+  res.writeHead(200, {'Content-Type': 'text/html'});
+  fs.readFile('./render.html',null,function(error,data){
+
+      if(error){
+
+        //The HTML is broken
+        res.writeHead(404);
+        res.write('File Not Found! Make sure it is in the same directory as the server!');
+
+      }else{
+
+        //The HTML is ok
+        console.log('The HTML file worked!');
+        res.write(data);
+
+      }
+
+      res.end()
 
   });
-
-  server.listen(port, hostname, () => {
-
-    console.log(`Server running at http://${hostname}:${port}/`);
-    
-  });
-
 }
 
 //Make Zoom API call
 function zoomer(){
 
-  var rp = require('request-promise');
+  const rp = require('request-promise');
 
   //Connection request uri
-  var connect_uri = 'https://api.zoom.us/v2/users';
+  const connect_uri = 'https://api.zoom.us/v2/users';
 
   //List of recordings uri
-  var uri2 = 'https://api.zoom.us/v2/users/BeOH5DDDReyRgPqyNAWiWA/recordings'
+  const uri2 = 'https://api.zoom.us/v2/users/BeOH5DDDReyRgPqyNAWiWA/recordings'
 
-  var options = {
+  const options = {
       uri: connect_uri,
         qs: {
           status: 'active' // -> uri + '?status=active'
@@ -66,3 +80,6 @@ rp(options)
 });
 
 }
+
+
+init();
