@@ -1,0 +1,32 @@
+
+<%- include("partials/header"); -%>
+    <h1>Home</h1>
+    <table class="table" >
+ <tbody>
+   <tr style="border-width:0">
+
+      <td class="col-6" style="border:none;">
+        <video id="myVideo" controls>
+          <source src="yesterday.mp4" type="video/mp4">
+        </video>
+        </td>
+
+<td class="col-6" style="border:none;">
+  <a href="javascript:setCurTime(92);" >1:32</a>
+  </td>
+  </tr>
+</tbody>
+</table>
+
+
+
+
+      <script>
+      function setCurTime(time) {
+        var vid = document.getElementById("myVideo");
+        vid.currentTime=time;
+      }
+      </script>
+
+
+<%- include("partials/footer"); -%>
