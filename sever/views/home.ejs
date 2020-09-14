@@ -1,0 +1,29 @@
+
+<%- include("partials/header"); -%>
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/editorjs@latest"></script>
+<script type="module" src="editor.js"></script>
+    <h1>Home</h1>
+    <div class="row">
+        <div class="col-md-6 video-div">
+
+            <video class="vid-zoom" id="myVideo"  controls>
+        <source src="video.mp4" type="video/mp4">
+      </video>
+          </div>
+        <div class="col-md-6"><div class="well text-editor" id="editorjs"></div>
+
+      </div>
+      </div>
+
+
+
+
+      <script>
+      function setCurTime(time) {
+        var vid = document.getElementById("myVideo");
+        vid.currentTime=time;
+      }
+      </script>
+
+
+<%- include("partials/footer"); -%>
