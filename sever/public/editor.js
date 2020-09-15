@@ -1,5 +1,13 @@
 
+
+
 const editor = new EditorJS({
+  tools: {
+      inlineCode: {
+        class: InlineCode,
+        shortcut: 'CMD+SHIFT+M',
+      }
+    },
 autofocus : true,
 data:{
   blocks:[

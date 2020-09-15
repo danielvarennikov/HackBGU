@@ -13,14 +13,14 @@
     <tbody>
     <%  students.forEach(function(student,index){ %>
 
-      <% if (student.name === name) { %>
+      <% if (student.user === user) { %>
 <tr class="selected">
 <%} else { %>
 <tr>
 <% } %>
         <th scope="row"><%=index+1%></th>
         <td><%=student.name%></td>
-        <td><%=student.score%></td>
+        <td><%=student.rating%></td>
       </tr>
 
 

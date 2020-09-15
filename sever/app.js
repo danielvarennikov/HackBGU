@@ -1,17 +1,16 @@
+//jshint esversion:6
 require('dotenv').config()
+// import { init } from "./rating.js";
+
 const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
 const mongoose = require('mongoose');
+const tb = require('./rating');
+const { Student } = require('./rating');
 
 mongoose.connect("mongodb://localhost:27017/studentDB",{ useUnifiedTopology: true ,useNewUrlParser: true});
 
-
-const studentSchema = new mongoose.Schema({
-   name: String,
-   score: Number
-});
-const Student = mongoose.model('Student', studentSchema);
 const app = express();
 app.set('view engine', 'ejs');
 
@@ -26,13 +25,18 @@ app.get("/", function(req, res) {
 });
 
 app.get("/ranking", function(req, res) {
-  Student.find({},function(err,students){
+studentsA = tb.print_table(Student).exec();
+console.log(studentsA);
+studentsA.then(function(students){
 students.sort(function(a,b){
-  return b.score-a.score;
-})
-    res.render("ranking",{students:students,name:"Baraa"});
+  return b.rating-a.rating;
 });
+console.log(students);
+    res.render("ranking",{students:students,user:"Jacob"});
 });
+
+});
+
 
 
 
@@ -54,7 +58,7 @@ app.get("/video/:postID", function(req, res){
 });
 
 
-
+// tb.init(tb.Student);
 app.listen(3000, function() {
   console.log("Server started successfully");
 });
